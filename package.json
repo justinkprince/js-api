@@ -3,10 +3,25 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "babel-node ./src/bin/www",
-    "clean": "rm -rf dist",
-    "build": "yarn run clean && babel ./src --out-dir dist --copy-files",
-    "prod": "node ./dist/bin/www"
+    "start": "yarn run prod",
+    "server": "node ./src/bin/www",
+    "dev": "NODE_ENV=development npm-run-all build server",
+    "watch:dev": "nodemon",
+    "prod": "NODE_ENV=production npm-run-all build server",
+    "transpile": "babel ./src --out-dir dist",
+    "build": "npm-run-all clean transpile",
+    "clean": "rimraf dist"
+  },
+  "nodemonConfig": {
+    "exec": "yarn run dev",
+    "watch": [
+      "src/*"
+    ],
+    "ignore": [
+      "**/__tests__/**",
+      "*.test.js",
+      "*.spec.js"
+    ]
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -15,6 +30,7 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
+    "npm-run-all": "^4.1.5",
     "sqlite3": "^5.0.2",
     "uuid": "^8.3.2"
   },
@@ -23,6 +39,7 @@
     "@babel/core": "^7.14.6",
     "@babel/node": "^7.14.5",
     "@babel/preset-env": "^7.14.5",
-    "faker": "^5.5.3"
+    "faker": "^5.5.3",
+    "nodemon": "^2.0.7"
   }
 }

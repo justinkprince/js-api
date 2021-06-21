@@ -26,3 +26,4 @@ Each branch will have a corresponding document in the `docs` directory to explai
 
 ## Branches
 - [001](docs/001-dependencies.md) - Dependencies
+- [002](docs/002-clean-up.md) - Clean up
